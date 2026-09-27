@@ -9,79 +9,405 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#0b0b0b;color:#fff}
+
+body{
+background:#0b0b0b;
+color:#fff;
+}
+
 button{cursor:pointer}
-#login{min-height:100vh;display:flex;align-items:center;justify-content:center}
-.login-box{width:350px;background:#151515;padding:35px;border:1px solid #d4af37;border-radius:15px;text-align:center}
-.login-box h1{color:#d4af37;margin-bottom:8px}
-.login-box p{color:#999;margin-bottom:20px}
-.login-box input{width:100%;padding:13px;margin:7px 0;background:#222;border:1px solid #444;border-radius:7px;color:#fff}
-.login-box button{width:100%;padding:13px;margin-top:10px;background:#d4af37;border:0;border-radius:7px;font-weight:bold}
-#error{display:none;color:#ff5555;margin-top:12px}
+
+#login{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.login-box{
+width:350px;
+background:#151515;
+padding:35px;
+border:1px solid #d4af37;
+border-radius:15px;
+text-align:center;
+}
+
+.login-box h1{
+color:#d4af37;
+margin-bottom:8px;
+}
+
+.login-box p{
+color:#999;
+margin-bottom:20px;
+}
+
+.login-box input{
+width:100%;
+padding:13px;
+margin:7px 0;
+background:#222;
+border:1px solid #444;
+border-radius:7px;
+color:#fff;
+}
+
+.login-box button{
+width:100%;
+padding:13px;
+margin-top:10px;
+background:#d4af37;
+border:0;
+border-radius:7px;
+font-weight:bold;
+}
+
+#error{
+display:none;
+color:#ff5555;
+margin-top:12px;
+}
+
 #app{display:none}
-.sidebar{position:fixed;left:0;top:0;width:230px;height:100vh;background:#111;border-right:1px solid #333;padding:25px 15px}
-.logo{text-align:center;color:#d4af37;font-size:25px;font-weight:bold;margin-bottom:30px}
-.sidebar button{width:100%;padding:13px;margin:5px 0;background:transparent;color:#ddd;border:0;border-radius:7px;text-align:left}
-.sidebar button:hover{background:#222;color:#d4af37}
-.main{margin-left:230px;padding:30px}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:230px;
+height:100vh;
+background:#111;
+border-right:1px solid #333;
+padding:25px 15px;
+}
+
+.logo{
+text-align:center;
+color:#d4af37;
+font-size:25px;
+font-weight:bold;
+margin-bottom:30px;
+}
+
+.sidebar button{
+width:100%;
+padding:13px;
+margin:5px 0;
+background:transparent;
+color:#ddd;
+border:0;
+border-radius:7px;
+text-align:left;
+}
+
+.sidebar button:hover{
+background:#222;
+color:#d4af37;
+}
+
+.main{
+margin-left:230px;
+padding:30px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
 .header h1{color:#d4af37}
-.logout{background:#d4af37;border:0;padding:10px 18px;border-radius:7px;font-weight:bold}
+
+.logout{
+background:#d4af37;
+border:0;
+padding:10px 18px;
+border-radius:7px;
+font-weight:bold;
+}
+
 .section{display:none}
 .section.active{display:block}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{background:#151515;border:1px solid #292929;padding:20px;border-radius:12px}
-.card h3{color:#aaa;font-size:14px}
-.card p{color:#d4af37;font-size:25px;margin-top:10px}
-.form-box,.table-box{background:#151515;padding:25px;border-radius:12px;margin-bottom:25px}
-.form-box h2,.table-box h2{color:#d4af37;margin-bottom:20px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.form-box input,.form-box textarea,.form-box select{width:100%;padding:12px;background:#222;color:white;border:1px solid #444;border-radius:7px}
-.form-box textarea{min-height:100px;resize:vertical}
-.full{grid-column:1/-1}
-.add-btn{background:#d4af37;border:0;padding:13px 25px;border-radius:7px;font-weight:bold}
-.table-box{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-th,td{padding:13px;border-bottom:1px solid #333;text-align:left}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.card{
+background:#151515;
+border:1px solid #292929;
+padding:20px;
+border-radius:12px;
+}
+
+.card h3{
+color:#aaa;
+font-size:14px;
+}
+
+.card p{
+color:#d4af37;
+font-size:25px;
+margin-top:10px;
+}
+
+.form-box,
+.table-box{
+background:#151515;
+padding:25px;
+border-radius:12px;
+margin-bottom:25px;
+}
+
+.form-box h2,
+.table-box h2{
+color:#d4af37;
+margin-bottom:20px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select{
+width:100%;
+padding:12px;
+background:#222;
+color:white;
+border:1px solid #444;
+border-radius:7px;
+}
+
+.form-box textarea{
+min-height:100px;
+resize:vertical;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+.add-btn{
+background:#d4af37;
+border:0;
+padding:13px 25px;
+border-radius:7px;
+font-weight:bold;
+}
+
+.table-box{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:13px;
+border-bottom:1px solid #333;
+text-align:left;
+}
+
 th{color:#d4af37}
-.empty{text-align:center;color:#888;padding:25px}
-.product-img{width:55px;height:55px;object-fit:cover;border-radius:7px}
-.delete-btn{background:#b33;color:#fff;border:0;padding:7px 10px;border-radius:5px}
-.status{margin-top:12px;color:#d4af37}
+
+.empty{
+text-align:center;
+color:#888;
+padding:25px;
+}
+
+.product-img{
+width:55px;
+height:55px;
+object-fit:cover;
+border-radius:7px;
+}
+
+.delete-btn{
+background:#b33;
+color:#fff;
+border:0;
+padding:7px 10px;
+border-radius:5px;
+}
+
+.status{
+margin-top:12px;
+color:#d4af37;
+}
+
+
+/* =========================
+   GOLD RATING
+========================= */
+
+.rating{
+white-space:nowrap;
+}
+
+.stars{
+color:#ffd700;
+font-size:18px;
+letter-spacing:1px;
+text-shadow:
+0 0 4px rgba(255,215,0,.7),
+0 0 9px rgba(255,215,0,.35);
+}
+
+.rating-number{
+color:#ddd;
+font-size:13px;
+margin-left:5px;
+}
+
+
+/* =========================
+   SMALL WATCH AD
+========================= */
+
+.watch-ad{
+position:fixed;
+right:18px;
+bottom:18px;
+width:190px;
+padding:14px;
+background:linear-gradient(135deg,#171717,#29220c);
+border:1px solid #d4af37;
+border-radius:14px;
+box-shadow:
+0 0 10px rgba(212,175,55,.25),
+0 0 25px rgba(212,175,55,.10);
+z-index:999;
+}
+
+.watch-ad .watch-icon{
+font-size:30px;
+float:left;
+margin-right:9px;
+}
+
+.watch-ad strong{
+color:#d4af37;
+font-size:14px;
+}
+
+.watch-ad small{
+display:block;
+color:#aaa;
+margin-top:4px;
+font-size:11px;
+}
+
+.watch-ad .ad-text{
+clear:both;
+padding-top:8px;
+color:#eee;
+font-size:12px;
+}
+
+.watch-ad span{
+color:#d4af37;
+font-weight:bold;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:800px){
-.sidebar{width:180px}
-.main{margin-left:180px}
-.cards{grid-template-columns:1fr 1fr}
-.form-grid{grid-template-columns:1fr}
+
+.sidebar{
+width:180px;
 }
+
+.main{
+margin-left:180px;
+}
+
+.cards{
+grid-template-columns:1fr 1fr;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.watch-ad{
+width:160px;
+right:10px;
+bottom:10px;
+}
+
+}
+
 @media(max-width:550px){
-.sidebar{position:relative;width:100%;height:auto}
-.main{margin-left:0}
-.cards{grid-template-columns:1fr}
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
 }
 </style>
 </head>
 
 <body>
 
+
+<!-- =========================
+     LOGIN
+========================= -->
+
 <div id="login">
+
 <div class="login-box">
 
 <h1>TIMEORA</h1>
+
 <p>Admin Panel</p>
 
-<input type="email" id="adminEmail" placeholder="Admin Email">
+<input
+type="email"
+id="adminEmail"
+placeholder="Admin Email">
 
-<input type="password" id="adminPassword" placeholder="Password">
+<input
+type="password"
+id="adminPassword"
+placeholder="Password">
 
 <button onclick="signIn()">LOGIN</button>
 
 <div id="error"></div>
 
 </div>
+
 </div>
 
+
+<!-- =========================
+     ADMIN APP
+========================= -->
 
 <div id="app">
 
@@ -89,27 +415,64 @@ th{color:#d4af37}
 
 <div class="logo">TIMEORA</div>
 
-<button onclick="showSection('dashboard')">Dashboard</button>
-<button onclick="showSection('products')">Products</button>
-<button onclick="showSection('orders')">Orders</button>
-<button onclick="showSection('customers')">Customers</button>
-<button onclick="showSection('analytics')">Analytics</button>
-<button onclick="showSection('admins')">Admin Management</button>
-<button onclick="showSection('settings')">Settings</button>
-<button onclick="logout()">Logout</button>
+<button onclick="showSection('dashboard')">
+Dashboard
+</button>
+
+<button onclick="showSection('products')">
+Products
+</button>
+
+<button onclick="showSection('orders')">
+Orders
+</button>
+
+<button onclick="showSection('customers')">
+Customers
+</button>
+
+<button onclick="showSection('analytics')">
+Analytics
+</button>
+
+<button onclick="showSection('admins')">
+Admin Management
+</button>
+
+<button onclick="showSection('settings')">
+Settings
+</button>
+
+<button onclick="logout()">
+Logout
+</button>
 
 </aside>
 
 
 <main class="main">
 
+
 <div class="header">
+
 <h1>TIMEORA Admin</h1>
-<button class="logout" onclick="logout()">Logout</button>
+
+<button
+class="logout"
+onclick="logout()">
+Logout
+</button>
+
 </div>
 
 
-<section id="dashboard" class="section active">
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section
+id="dashboard"
+class="section active">
 
 <div class="cards">
 
@@ -138,7 +501,13 @@ th{color:#d4af37}
 </section>
 
 
-<section id="products" class="section">
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section
+id="products"
+class="section">
 
 <div class="form-box">
 
@@ -146,46 +515,114 @@ th{color:#d4af37}
 
 <div class="form-grid">
 
-<input type="text" id="productName" placeholder="Product Name">
 
-<input type="number" id="price" placeholder="Price">
+<input
+type="text"
+id="productName"
+placeholder="Product Name">
 
-<input type="number" id="oldPrice" placeholder="Old Price">
 
-<select id="category">
+<input
+type="number"
+id="price"
+placeholder="Price">
 
-<option value="">Select Category</option>
-<option value="Men">Men</option>
-<option value="Women">Women</option>
-<option value="Smart">Smart</option>
-<option value="Luxury">Luxury</option>
-<option value="Sport">Sport</option>
+
+<input
+type="number"
+id="oldPrice"
+placeholder="Old Price">
+
+
+<select id="currency">
+
+<option value="BDT">৳ BDT — Bangladeshi Taka</option>
+
+<option value="USD">$ USD — US Dollar</option>
+
+<option value="SAR">﷼ SAR — Saudi Riyal</option>
 
 </select>
 
-<input type="number" id="stock" placeholder="Stock">
 
-<input type="text" id="currency" value="BDT" placeholder="Currency">
+<select id="category">
 
-<input type="text" id="color" placeholder="Color">
+<option value="">
+Select Category
+</option>
 
-<input type="file" id="productImage" accept="image/*" class="full">
+<option value="Men">
+Men
+</option>
 
-<textarea id="description" placeholder="Product Description" class="full"></textarea>
+<option value="Women">
+Women
+</option>
+
+<option value="Smart">
+Smart
+</option>
+
+<option value="Luxury">
+Luxury
+</option>
+
+<option value="Sport">
+Sport
+</option>
+
+</select>
+
+
+<input
+type="number"
+id="stock"
+placeholder="Stock">
+
+
+<input
+type="text"
+id="color"
+placeholder="Color">
+
+
+<input
+type="file"
+id="productImage"
+accept="image/*"
+class="full">
+
+
+<textarea
+id="description"
+placeholder="Product Description"
+class="full">
+</textarea>
+
 
 <div class="full">
 
-<button class="add-btn" onclick="addProduct()">
+<button
+class="add-btn"
+onclick="addProduct()">
+
 + ADD PRODUCT
+
 </button>
 
-<div id="productStatus" class="status"></div>
+<div
+id="productStatus"
+class="status">
+</div>
+
+</div>
 
 </div>
 
 </div>
-</div>
 
+
+<!-- PRODUCTS TABLE -->
 
 <div class="table-box">
 
@@ -196,12 +633,21 @@ th{color:#d4af37}
 <thead>
 
 <tr>
+
 <th>Image</th>
+
 <th>Name</th>
+
 <th>Price</th>
+
 <th>Category</th>
+
 <th>Stock</th>
+
+<th>Rating</th>
+
 <th>Action</th>
+
 </tr>
 
 </thead>
@@ -209,7 +655,15 @@ th{color:#d4af37}
 <tbody id="productTable">
 
 <tr>
-<td colspan="6" class="empty">Loading...</td>
+
+<td
+colspan="7"
+class="empty">
+
+Loading...
+
+</td>
+
 </tr>
 
 </tbody>
@@ -221,60 +675,135 @@ th{color:#d4af37}
 </section>
 
 
-<section id="orders" class="section">
+<!-- =========================
+     OTHER SECTIONS
+========================= -->
+
+<section
+id="orders"
+class="section">
+
 <div class="table-box">
+
 <h2>Orders</h2>
-<p class="empty">Orders will appear here.</p>
+
+<p class="empty">
+Orders will appear here.
+</p>
+
 </div>
+
 </section>
 
 
-<section id="customers" class="section">
+<section
+id="customers"
+class="section">
+
 <div class="table-box">
+
 <h2>Customers</h2>
-<p class="empty">Customers will appear here.</p>
+
+<p class="empty">
+Customers will appear here.
+</p>
+
 </div>
+
 </section>
 
 
-<section id="analytics" class="section">
+<section
+id="analytics"
+class="section">
+
 <div class="table-box">
+
 <h2>Analytics</h2>
-<p class="empty">Analytics will appear here.</p>
+
+<p class="empty">
+Analytics will appear here.
+</p>
+
 </div>
+
 </section>
 
 
-<section id="admins" class="section">
+<section
+id="admins"
+class="section">
+
 <div class="table-box">
+
 <h2>Admin Management</h2>
-<p class="empty">Admin management will be added later.</p>
+
+<p class="empty">
+Admin management will be added later.
+</p>
+
 </div>
+
 </section>
 
 
-<section id="settings" class="section">
+<section
+id="settings"
+class="section">
+
 <div class="table-box">
+
 <h2>Settings</h2>
-<p class="empty">TIMEORA settings.</p>
+
+<p class="empty">
+TIMEORA settings.
+</p>
+
 </div>
+
 </section>
+
 
 </main>
+
+
+<!-- =========================
+     SMALL WATCH AD
+========================= -->
+
+<div class="watch-ad">
+
+<div class="watch-icon">⌚</div>
+
+<strong>TIMEORA</strong>
+
+<small>Premium Watches</small>
+
+<div class="ad-text">
+
+Discover your perfect timepiece.
+
+<span>Shop Now</span>
+
+</div>
+
+</div>
+
+
 </div>
 
 
 <script>
 
 /* =========================
-   SUPABASE CONNECTION
+   SUPABASE
 ========================= */
 
 const SUPABASE_URL =
 "https://ylfbhpmgmxbdeakoyutz.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_Ali0Wi4TQsWkcLEuPY57JA_JBxIAJu0";
+"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
 
 const supabaseClient =
 window.supabase.createClient(
@@ -290,32 +819,49 @@ SUPABASE_PUBLISHABLE_KEY
 async function signIn(){
 
 const email =
-document.getElementById("adminEmail").value.trim();
+document.getElementById("adminEmail")
+.value.trim();
 
 const password =
-document.getElementById("adminPassword").value;
+document.getElementById("adminPassword")
+.value;
 
 const error =
 document.getElementById("error");
 
 error.style.display="none";
 
-const {data,error:loginError} =
+
+const {
+data,
+error:loginError
+} =
 await supabaseClient.auth.signInWithPassword({
+
 email:email,
+
 password:password
+
 });
+
 
 if(loginError){
 
-error.textContent=loginError.message;
+error.textContent =
+loginError.message;
+
 error.style.display="block";
+
 return;
 
 }
 
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
+
+document.getElementById("login")
+.style.display="none";
+
+document.getElementById("app")
+.style.display="block";
 
 loadProducts();
 
@@ -330,8 +876,11 @@ async function logout(){
 
 await supabaseClient.auth.signOut();
 
-document.getElementById("app").style.display="none";
-document.getElementById("login").style.display="flex";
+document.getElementById("app")
+.style.display="none";
+
+document.getElementById("login")
+.style.display="flex";
 
 }
 
@@ -342,14 +891,21 @@ document.getElementById("login").style.display="flex";
 
 function showSection(section){
 
-document.querySelectorAll(".section").forEach(
-item=>item.classList.remove("active")
+document
+.querySelectorAll(".section")
+.forEach(item =>
+item.classList.remove("active")
 );
 
-document.getElementById(section).classList.add("active");
+document
+.getElementById(section)
+.classList.add("active");
+
 
 if(section==="products"){
+
 loadProducts();
+
 }
 
 }
@@ -364,32 +920,50 @@ async function addProduct(){
 const status =
 document.getElementById("productStatus");
 
+
 const name =
-document.getElementById("productName").value.trim();
+document.getElementById("productName")
+.value.trim();
+
 
 const price =
-document.getElementById("price").value;
+document.getElementById("price")
+.value;
+
 
 const oldPrice =
-document.getElementById("oldPrice").value;
+document.getElementById("oldPrice")
+.value;
 
-const category =
-document.getElementById("category").value;
-
-const stock =
-document.getElementById("stock").value;
 
 const currency =
-document.getElementById("currency").value || "BDT";
+document.getElementById("currency")
+.value;
+
+
+const category =
+document.getElementById("category")
+.value;
+
+
+const stock =
+document.getElementById("stock")
+.value;
+
 
 const color =
-document.getElementById("color").value;
+document.getElementById("color")
+.value;
+
 
 const description =
-document.getElementById("description").value;
+document.getElementById("description")
+.value;
+
 
 const imageFile =
-document.getElementById("productImage").files[0];
+document.getElementById("productImage")
+.files[0];
 
 
 if(!name || !price || !category){
@@ -402,7 +976,8 @@ return;
 }
 
 
-status.textContent="Saving product...";
+status.textContent =
+"Saving product...";
 
 
 let imageUrl=null;
@@ -413,49 +988,94 @@ let imageUrl=null;
 if(imageFile){
 
 const fileName =
-Date.now()+"-"+imageFile.name.replace(/\s+/g,"-");
+Date.now()+"-"+imageFile.name
+.replace(/\s+/g,"-");
 
-const {error:uploadError} =
-await supabaseClient.storage
+
+const {
+error:uploadError
+} =
+await supabaseClient
+.storage
 .from("timeora")
-.upload(fileName,imageFile);
+.upload(
+fileName,
+imageFile
+);
+
 
 if(uploadError){
 
 status.textContent =
-"Image upload error: "+uploadError.message;
+"Image upload error: "
++
+uploadError.message;
 
 return;
 
 }
 
 
-const {data:urlData} =
-supabaseClient.storage
+const {
+data:urlData
+} =
+supabaseClient
+.storage
 .from("timeora")
 .getPublicUrl(fileName);
 
-imageUrl=urlData.publicUrl;
+
+imageUrl =
+urlData.publicUrl;
 
 }
 
 
-/* DATABASE INSERT */
+/* DATABASE */
 
-const {error:insertError} =
+const {
+error:insertError
+} =
 await supabaseClient
 .from("products")
 .insert({
 
 name:name,
-description:description || null,
-price:Number(price),
-old_price:oldPrice ? Number(oldPrice) : null,
-category:category,
-currency:currency,
-stock:stock ? Number(stock) : 0,
-image_url:imageUrl,
-color:color || null
+
+description:
+description || null,
+
+price:
+Number(price),
+
+old_price:
+oldPrice
+?
+Number(oldPrice)
+:
+null,
+
+category:
+category,
+
+currency:
+currency,
+
+stock:
+stock
+?
+Number(stock)
+:
+0,
+
+image_url:
+imageUrl,
+
+color:
+color || null,
+
+rating:
+4.5
 
 });
 
@@ -463,7 +1083,9 @@ color:color || null
 if(insertError){
 
 status.textContent =
-"Database error: "+insertError.message;
+"Database error: "
++
+insertError.message;
 
 return;
 
@@ -474,17 +1096,125 @@ status.textContent =
 "Product added successfully!";
 
 
-document.getElementById("productName").value="";
-document.getElementById("price").value="";
-document.getElementById("oldPrice").value="";
-document.getElementById("category").value="";
-document.getElementById("stock").value="";
-document.getElementById("color").value="";
-document.getElementById("description").value="";
-document.getElementById("productImage").value="";
+document.getElementById("productName")
+.value="";
+
+document.getElementById("price")
+.value="";
+
+document.getElementById("oldPrice")
+.value="";
+
+document.getElementById("currency")
+.value="BDT";
+
+document.getElementById("category")
+.value="";
+
+document.getElementById("stock")
+.value="";
+
+document.getElementById("color")
+.value="";
+
+document.getElementById("description")
+.value="";
+
+document.getElementById("productImage")
+.value="";
 
 
 loadProducts();
+
+}
+
+
+/* =========================
+   DEMO RATING
+   20 PRODUCT DISTRIBUTION
+========================= */
+
+function getDemoRating(index){
+
+const position =
+(index % 20) + 1;
+
+
+/*
+1-4   = 5.0
+5-13  = 4.5
+14-18 = 4.0
+19-20 = 3.5
+*/
+
+if(position <= 4){
+return 5.0;
+}
+
+if(position <= 13){
+return 4.5;
+}
+
+if(position <= 18){
+return 4.0;
+}
+
+return 3.5;
+
+}
+
+
+/* =========================
+   STAR DISPLAY
+========================= */
+
+function createStars(rating){
+
+let stars="";
+
+const full =
+Math.floor(rating);
+
+const half =
+rating % 1 !== 0;
+
+
+for(let i=1;i<=5;i++){
+
+if(i<=full){
+
+stars+="★";
+
+}
+
+else if(i===full+1 && half){
+
+stars+="★";
+
+}
+
+else{
+
+stars+="☆";
+
+}
+
+}
+
+
+return `
+<div class="rating">
+
+<span class="stars">
+${stars}
+</span>
+
+<span class="rating-number">
+${rating.toFixed(1)}
+</span>
+
+</div>
+`;
 
 }
 
@@ -498,25 +1228,36 @@ async function loadProducts(){
 const table =
 document.getElementById("productTable");
 
-table.innerHTML=
-'<tr><td colspan="6" class="empty">Loading...</td></tr>';
+
+table.innerHTML =
+'<tr><td colspan="7" class="empty">Loading...</td></tr>';
 
 
-const {data,error} =
+const {
+data,
+error
+} =
 await supabaseClient
 .from("products")
 .select("*")
-.order("created_at",{ascending:false});
+.order(
+"created_at",
+{
+ascending:false
+}
+);
 
 
 if(error){
 
-table.innerHTML=
-`<tr>
-<td colspan="6" class="empty">
-${error.message}
+table.innerHTML =
+`
+<tr>
+<td colspan="7" class="empty">
+${escapeHtml(error.message)}
 </td>
-</tr>`;
+</tr>
+`;
 
 return;
 
@@ -525,10 +1266,18 @@ return;
 
 if(!data || data.length===0){
 
-table.innerHTML=
-'<tr><td colspan="6" class="empty">No products yet.</td></tr>';
+table.innerHTML =
+`
+<tr>
+<td colspan="7" class="empty">
+No products yet.
+</td>
+</tr>
+`;
 
-document.getElementById("totalProducts").textContent="0";
+document.getElementById(
+"totalProducts"
+).textContent="0";
 
 return;
 
@@ -538,64 +1287,124 @@ return;
 table.innerHTML="";
 
 
-data.forEach(product=>{
+data.forEach(
+(product,index)=>{
 
-const row=document.createElement("tr");
+const row =
+document.createElement("tr");
 
-row.innerHTML=`
+
+/*
+Use saved rating if available.
+Otherwise demo distribution.
+*/
+
+const rating =
+product.rating
+?
+Number(product.rating)
+:
+getDemoRating(index);
+
+
+row.innerHTML = `
 
 <td>
+
 ${
 product.image_url
 ?
-`<img src="${product.image_url}" class="product-img">`
+
+`<img
+src="${product.image_url}"
+class="product-img">`
+
 :
+
 "No Image"
 }
+
 </td>
 
-<td>${escapeHtml(product.name || "")}</td>
-
-<td>${product.currency || "BDT"} ${product.price || 0}</td>
-
-<td>${escapeHtml(product.category || "")}</td>
-
-<td>${product.stock || 0}</td>
 
 <td>
+${escapeHtml(
+product.name || ""
+)}
+</td>
+
+
+<td>
+${escapeHtml(
+product.currency || "BDT"
+)}
+${product.price || 0}
+</td>
+
+
+<td>
+${escapeHtml(
+product.category || ""
+)}
+</td>
+
+
+<td>
+${product.stock || 0}
+</td>
+
+
+<td>
+${createStars(rating)}
+</td>
+
+
+<td>
+
 <button
 class="delete-btn"
 onclick="deleteProduct('${product.id}')">
+
 Delete
+
 </button>
+
 </td>
 
 `;
+
 
 table.appendChild(row);
 
 });
 
 
-document.getElementById("totalProducts").textContent=
+document.getElementById(
+"totalProducts"
+).textContent =
 data.length;
 
 }
 
 
 /* =========================
-   DELETE PRODUCT
+   DELETE
 ========================= */
 
 async function deleteProduct(id){
 
 const ok =
-confirm("Delete this product?");
+confirm(
+"Delete this product?"
+);
+
 
 if(!ok)return;
 
 
-const {error} =
+const {
+error
+} =
 await supabaseClient
 .from("products")
 .delete()
@@ -605,6 +1414,7 @@ await supabaseClient
 if(error){
 
 alert(error.message);
+
 return;
 
 }
@@ -621,7 +1431,8 @@ loadProducts();
 
 function escapeHtml(text){
 
-const div=document.createElement("div");
+const div =
+document.createElement("div");
 
 div.textContent=text;
 
@@ -631,24 +1442,33 @@ return div.innerHTML;
 
 
 /* =========================
-   CHECK EXISTING LOGIN
+   SESSION
 ========================= */
 
 async function checkSession(){
 
-const {data} =
-await supabaseClient.auth.getSession();
+const {
+data
+} =
+await supabaseClient
+.auth
+.getSession();
+
 
 if(data.session){
 
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
+document.getElementById("login")
+.style.display="none";
+
+document.getElementById("app")
+.style.display="block";
 
 loadProducts();
 
 }
 
 }
+
 
 checkSession();
 
