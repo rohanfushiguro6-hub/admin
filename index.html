@@ -6,316 +6,275 @@
 <title>TIMEORA Admin Panel</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
   font-family:Arial,sans-serif;
-  background:#08090c;
+}
+
+body{
+  background:#0b0b0b;
   color:#fff;
 }
-button,input,select{font:inherit}
 
-.login{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:radial-gradient(circle at top,#33270d,#08090c 60%);
-}
-.login-box{
-  width:100%;
-  max-width:420px;
-  background:#111216;
-  border:1px solid #5d4a19;
-  border-radius:24px;
-  padding:40px 30px;
-  text-align:center;
-  box-shadow:0 25px 80px #000;
-}
-.logo{
-  color:#d4af37;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:5px;
-}
-.sub{
-  color:#777;
-  margin-top:8px;
-  font-size:11px;
-  letter-spacing:2px;
-}
-.login-box h2{margin:35px 0 15px}
-.input{
-  width:100%;
-  padding:14px;
-  margin-top:12px;
-  border-radius:10px;
-  border:1px solid #333;
-  background:#090a0d;
-  color:white;
-  outline:none;
-}
-.input:focus{border-color:#d4af37}
-.gold-btn{
-  width:100%;
-  padding:14px;
-  margin-top:18px;
-  border:0;
-  border-radius:10px;
-  background:linear-gradient(135deg,#f1d878,#b8860b);
-  font-weight:800;
+button{
   cursor:pointer;
 }
-.error{
-  color:#ff6868;
-  font-size:12px;
+
+#login{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.login-box{
+  width:350px;
+  padding:35px;
+  background:#151515;
+  border:1px solid #d4af37;
+  border-radius:15px;
+  text-align:center;
+}
+
+.login-box h1{
+  color:#d4af37;
+  margin-bottom:10px;
+}
+
+.login-box p{
+  color:#aaa;
+  margin-bottom:25px;
+}
+
+.login-box input{
+  width:100%;
+  padding:13px;
+  margin:8px 0;
+  background:#222;
+  border:1px solid #444;
+  color:white;
+  border-radius:7px;
+}
+
+.login-box button{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  background:#d4af37;
+  border:0;
+  border-radius:7px;
+  font-weight:bold;
+}
+
+#error{
+  display:none;
+  color:#ff5555;
   margin-top:12px;
+}
+
+#app{
   display:none;
 }
 
-/* APP */
-.app{display:none;min-height:100vh}
 .sidebar{
   position:fixed;
-  width:245px;
+  left:0;
+  top:0;
+  width:230px;
   height:100vh;
-  background:#0d0e12;
-  border-right:1px solid #24252a;
+  background:#111;
+  border-right:1px solid #333;
   padding:25px 15px;
 }
-.side-logo{
-  color:#d4af37;
+
+.logo{
   text-align:center;
+  color:#d4af37;
   font-size:25px;
-  font-weight:900;
-  letter-spacing:4px;
+  font-weight:bold;
+  margin-bottom:30px;
 }
-.admin{
-  text-align:center;
-  color:#777;
-  font-size:10px;
-  letter-spacing:2px;
-  margin:7px 0 25px;
-}
-.nav button{
+
+.sidebar button{
   width:100%;
-  border:0;
-  background:transparent;
-  color:#999;
   padding:13px;
-  margin:3px 0;
-  border-radius:10px;
+  margin:5px 0;
+  background:transparent;
+  color:#ddd;
+  border:0;
+  border-radius:7px;
   text-align:left;
-  cursor:pointer;
 }
-.nav button:hover,.nav .active{
-  background:#1d1a10;
+
+.sidebar button:hover{
+  background:#222;
   color:#d4af37;
-}
-.logout{
-  position:absolute;
-  left:15px;
-  right:15px;
-  bottom:20px;
 }
 
 .main{
-  margin-left:245px;
-  padding:28px;
+  margin-left:230px;
+  padding:30px;
 }
-.top{
+
+.header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin-bottom:25px;
 }
-.top h1{font-size:28px}
-.top p{color:#777;margin-top:5px;font-size:13px}
-.currency{
-  background:#111216;
-  border:1px solid #333;
-  color:white;
-  padding:10px 14px;
-  border-radius:9px;
+
+.header h1{
+  color:#d4af37;
 }
 
-.section{display:none}
-.section.active{display:block}
+.logout{
+  background:#d4af37;
+  border:0;
+  padding:10px 18px;
+  border-radius:7px;
+  font-weight:bold;
+}
 
-.stats{
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
 }
+
 .card{
-  background:linear-gradient(145deg,#15161a,#0d0e11);
-  border:1px solid #24252a;
-  border-radius:17px;
+  background:#151515;
+  border:1px solid #292929;
   padding:20px;
+  border-radius:12px;
 }
-.label{
-  color:#777;
-  font-size:11px;
-  text-transform:uppercase;
+
+.card h3{
+  color:#aaa;
+  font-size:14px;
 }
-.value{
-  margin-top:10px;
+
+.card p{
+  color:#d4af37;
   font-size:25px;
-  font-weight:800;
-}
-.gold{color:#d4af37}
-
-.grid{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:18px;
-  margin-top:18px;
-}
-.title{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:18px;
-}
-.title h2{font-size:18px}
-.title span{color:#777;font-size:11px}
-
-/* chart */
-.chart{
-  height:270px;
-  display:flex;
-  align-items:end;
-  gap:12px;
-  padding:15px;
-}
-.bar{
-  flex:1;
-  background:linear-gradient(#e3c75d,#80600d);
-  border-radius:7px 7px 0 0;
-  min-height:25px;
+  margin-top:10px;
 }
 
-/* product */
-.product{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:13px 0;
-  border-bottom:1px solid #24252a;
-}
-.product-left{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-.product img{
-  width:48px;
-  height:48px;
-  border-radius:9px;
-  object-fit:cover;
-}
-.product small{color:#d4af37}
-
-/* tables */
-.table-wrap{overflow:auto}
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
-}
-th,td{
-  padding:14px 10px;
-  border-bottom:1px solid #24252a;
-  text-align:left;
-  font-size:13px;
-}
-th{
-  color:#777;
-  font-size:10px;
-  text-transform:uppercase;
-}
-.status{
-  color:#63d69e;
-  background:#123325;
-  padding:5px 8px;
-  border-radius:20px;
-  font-size:10px;
+.form-box{
+  background:#151515;
+  padding:25px;
+  border-radius:12px;
+  margin-bottom:25px;
 }
 
-/* forms */
+.form-box h2{
+  color:#d4af37;
+  margin-bottom:20px;
+}
+
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
 }
-.form-group{margin-bottom:15px}
-.form-group label{
-  display:block;
-  color:#aaa;
-  font-size:12px;
-  margin-bottom:7px;
-}
-.form-group input,
-.form-group textarea,
-.form-group select{
+
+.form-box input,
+.form-box textarea,
+.form-box select{
   width:100%;
-  background:#090a0d;
-  border:1px solid #333;
+  padding:12px;
+  background:#222;
   color:white;
-  padding:13px;
-  border-radius:9px;
-  outline:none;
-}
-.form-group textarea{height:120px;resize:vertical}
-.full{grid-column:1/-1}
-.add-btn{
-  padding:12px 20px;
-  border:0;
-  border-radius:9px;
-  background:#d4af37;
-  color:#111;
-  font-weight:bold;
-  cursor:pointer;
+  border:1px solid #444;
+  border-radius:7px;
 }
 
-/* mobile */
-@media(max-width:900px){
-  .stats{grid-template-columns:1fr 1fr}
-  .grid{grid-template-columns:1fr}
+.form-box textarea{
+  min-height:100px;
+  resize:vertical;
 }
-@media(max-width:700px){
+
+.full{
+  grid-column:1/-1;
+}
+
+.add-btn{
+  background:#d4af37;
+  border:0;
+  padding:13px 25px;
+  border-radius:7px;
+  font-weight:bold;
+}
+
+.table-box{
+  background:#151515;
+  padding:20px;
+  border-radius:12px;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:13px;
+  border-bottom:1px solid #333;
+  text-align:left;
+}
+
+th{
+  color:#d4af37;
+}
+
+.empty{
+  text-align:center;
+  color:#888;
+  padding:25px;
+}
+
+@media(max-width:800px){
+  .sidebar{
+    width:180px;
+  }
+
+  .main{
+    margin-left:180px;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:550px){
   .sidebar{
     position:relative;
     width:100%;
     height:auto;
-    border-right:0;
-    border-bottom:1px solid #24252a;
   }
-  .nav{
-    display:flex;
-    overflow:auto;
-  }
-  .nav button{
-    min-width:125px;
-  }
-  .logout{
-    position:relative;
-    left:auto;
-    right:auto;
-    bottom:auto;
-    margin-top:10px;
-  }
+
   .main{
     margin-left:0;
-    padding:17px;
   }
-  .top{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:15px;
+
+  .cards{
+    grid-template-columns:1fr;
   }
-  .stats{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .full{grid-column:auto}
 }
 </style>
 </head>
@@ -323,22 +282,29 @@ th{
 <body>
 
 <!-- LOGIN -->
-<div class="login" id="login">
+<div id="login">
 
   <div class="login-box">
 
-    <div class="logo">TIMEORA</div>
-    <div class="sub">PRIVATE ADMIN PORTAL</div>
+    <h1>TIMEORA</h1>
+    <p>Admin Panel</p>
 
-    <h2>Welcome Back</h2>
+    <input
+      type="text"
+      id="adminId"
+      placeholder="Admin ID"
+    >
 
-    <input class="input" id="adminId" placeholder="Admin ID / Email">
-    <input class="input" id="password" type="password" placeholder="Password">
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
 
-    <button class="gold-btn" onclick="signIn()">SIGN IN</button>
+    <button onclick="signIn()">LOGIN</button>
 
-    <div class="error" id="error">
-      Invalid Admin ID or Password
+    <div id="error">
+      Wrong Admin ID or Password
     </div>
 
   </div>
@@ -346,48 +312,43 @@ th{
 </div>
 
 
-<!-- APP -->
-<div class="app" id="app">
+<!-- ADMIN APP -->
+<div id="app">
 
   <aside class="sidebar">
 
-    <div class="side-logo">TIMEORA</div>
-    <div class="admin">MAIN ADMIN</div>
+    <div class="logo">TIMEORA</div>
 
-    <div class="nav">
+    <button onclick="showSection('dashboard')">
+      Dashboard
+    </button>
 
-      <button class="active" onclick="showSection('dashboard',this)">
-        📊 Dashboard
-      </button>
+    <button onclick="showSection('products')">
+      Products
+    </button>
 
-      <button onclick="showSection('products',this)">
-        ⌚ Products
-      </button>
+    <button onclick="showSection('orders')">
+      Orders
+    </button>
 
-      <button onclick="showSection('orders',this)">
-        📦 Orders
-      </button>
+    <button onclick="showSection('customers')">
+      Customers
+    </button>
 
-      <button onclick="showSection('customers',this)">
-        👥 Customers
-      </button>
+    <button onclick="showSection('analytics')">
+      Analytics
+    </button>
 
-      <button onclick="showSection('analytics',this)">
-        📈 Analytics
-      </button>
+    <button onclick="showSection('admins')">
+      Admin Management
+    </button>
 
-      <button onclick="showSection('admins',this)">
-        👤 Admin Management
-      </button>
+    <button onclick="showSection('settings')">
+      Settings
+    </button>
 
-      <button onclick="showSection('settings',this)">
-        ⚙️ Settings
-      </button>
-
-    </div>
-
-    <button class="nav logout" onclick="logout()">
-      🚪 Logout
+    <button onclick="logout()">
+      Logout
     </button>
 
   </aside>
@@ -395,110 +356,46 @@ th{
 
   <main class="main">
 
-    <div class="top">
-      <div>
-        <h1 id="pageTitle">Dashboard</h1>
-        <p>TIMEORA Premium Administration</p>
-      </div>
+    <div class="header">
 
-      <select class="currency" onchange="changeCurrency(this.value)">
-        <option value="SAR">🇸🇦 SAR</option>
-        <option value="USD">🇺🇸 USD</option>
-        <option value="BDT">🇧🇩 BDT</option>
-        <option value="EUR">🇪🇺 EUR</option>
-        <option value="GBP">🇬🇧 GBP</option>
-      </select>
+      <h1>TIMEORA Admin</h1>
+
+      <button
+        class="logout"
+        onclick="logout()"
+      >
+        Logout
+      </button>
+
     </div>
 
 
     <!-- DASHBOARD -->
-    <section id="dashboard" class="section active">
+    <section
+      id="dashboard"
+      class="section active"
+    >
 
-      <div class="stats">
+      <div class="cards">
 
         <div class="card">
-          <div class="label">Revenue · 24H</div>
-          <div class="value gold" id="rev24">SAR 2,450</div>
+          <h3>Total Revenue</h3>
+          <p>৳0</p>
         </div>
 
         <div class="card">
-          <div class="label">Revenue · 72H</div>
-          <div class="value">SAR 6,820</div>
+          <h3>Total Products</h3>
+          <p id="totalProducts">0</p>
         </div>
 
         <div class="card">
-          <div class="label">Revenue · 7 Days</div>
-          <div class="value">SAR 18,420</div>
+          <h3>Total Orders</h3>
+          <p>0</p>
         </div>
 
         <div class="card">
-          <div class="label">Revenue · 30 Days</div>
-          <div class="value">SAR 71,250</div>
-        </div>
-
-      </div>
-
-      <div class="grid">
-
-        <div class="card">
-
-          <div class="title">
-            <h2>Sales Analytics</h2>
-            <span>Last 7 Days</span>
-          </div>
-
-          <div class="chart">
-            <div class="bar" style="height:35%"></div>
-            <div class="bar" style="height:50%"></div>
-            <div class="bar" style="height:42%"></div>
-            <div class="bar" style="height:70%"></div>
-            <div class="bar" style="height:58%"></div>
-            <div class="bar" style="height:88%"></div>
-            <div class="bar" style="height:65%"></div>
-          </div>
-
-        </div>
-
-        <div class="card">
-
-          <div class="title">
-            <h2>Top Products</h2>
-            <span>Sales</span>
-          </div>
-
-          <div class="product">
-            <div class="product-left">
-              <img src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=200">
-              <div>
-                Luxury Black<br>
-                <small>120 sold</small>
-              </div>
-            </div>
-            <b>120</b>
-          </div>
-
-          <div class="product">
-            <div class="product-left">
-              <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=200">
-              <div>
-                Steel Chronograph<br>
-                <small>87 sold</small>
-              </div>
-            </div>
-            <b>87</b>
-          </div>
-
-          <div class="product">
-            <div class="product-left">
-              <img src="https://images.unsplash.com/photo-1544117519-31a4b719223d?w=200">
-              <div>
-                Smart Watch<br>
-                <small>64 sold</small>
-              </div>
-            </div>
-            <b>64</b>
-          </div>
-
+          <h3>Total Customers</h3>
+          <p>0</p>
         </div>
 
       </div>
@@ -507,113 +404,139 @@ th{
 
 
     <!-- PRODUCTS -->
-    <section id="products" class="section">
+    <section
+      id="products"
+      class="section"
+    >
 
-      <div class="card">
+      <div class="form-box">
 
-        <div class="title">
-          <h2>Product Management</h2>
-          <span>Add products for Global-Shop</span>
-        </div>
+        <h2>Add Product</h2>
 
         <div class="form-grid">
 
-          <div class="form-group">
-            <label>Product Name</label>
-            <input placeholder="Luxury Black Watch">
-          </div>
+          <input
+            type="text"
+            id="productName"
+            placeholder="Product Name"
+          >
 
-          <div class="form-group">
-            <label>Brand</label>
-            <input placeholder="TIMEORA">
-          </div>
+          <input
+            type="text"
+            id="brand"
+            placeholder="Brand"
+          >
 
-          <div class="form-group">
-            <label>Price</label>
-            <input type="number" placeholder="599">
-          </div>
+          <input
+            type="number"
+            id="price"
+            placeholder="Price"
+          >
 
-          <div class="form-group">
-            <label>Old Price</label>
-            <input type="number" placeholder="749">
-          </div>
+          <input
+            type="number"
+            id="oldPrice"
+            placeholder="Old Price"
+          >
 
-          <div class="form-group">
-            <label>Category</label>
-            <select>
-              <option>Men</option>
-              <option>Women</option>
-              <option>Smart</option>
-              <option>Luxury</option>
-              <option>Sport</option>
-            </select>
-          </div>
+          <select id="category">
 
-          <div class="form-group">
-            <label>Stock</label>
-            <input type="number" placeholder="50">
-          </div>
+            <option value="">
+              Select Category
+            </option>
 
-          <div class="form-group full">
-            <label>Product Image</label>
-            <input type="file" accept="image/*">
-          </div>
+            <option value="Men">
+              Men
+            </option>
 
-          <div class="form-group full">
-            <label>Product Description</label>
-            <textarea placeholder="Write product information..."></textarea>
-          </div>
+            <option value="Women">
+              Women
+            </option>
+
+            <option value="Smart">
+              Smart
+            </option>
+
+            <option value="Luxury">
+              Luxury
+            </option>
+
+            <option value="Sport">
+              Sport
+            </option>
+
+          </select>
+
+
+          <input
+            type="number"
+            id="stock"
+            placeholder="Stock"
+          >
+
+
+          <input
+            type="file"
+            id="productImage"
+            accept="image/*"
+            class="full"
+          >
+
+
+          <textarea
+            id="description"
+            placeholder="Product Description"
+            class="full"
+          ></textarea>
+
 
           <div class="full">
-            <button class="add-btn">
+
+            <button
+              class="add-btn"
+              onclick="addProduct()"
+            >
               + ADD PRODUCT
             </button>
+
           </div>
 
         </div>
 
       </div>
 
-      <div class="card" style="margin-top:18px">
 
-        <div class="title">
-          <h2>Products</h2>
-          <span>Current products</span>
-        </div>
+      <div class="table-box">
 
-        <div class="table-wrap">
+        <h2>Products</h2>
 
-          <table>
+        <br>
+
+        <table>
+
+          <thead>
+
             <tr>
-              <th>Product</th>
-              <th>Category</th>
+              <th>Name</th>
+              <th>Brand</th>
               <th>Price</th>
+              <th>Category</th>
               <th>Stock</th>
-              <th>Sold</th>
-              <th>Action</th>
             </tr>
+
+          </thead>
+
+          <tbody id="productTable">
 
             <tr>
-              <td>Luxury Black Edition</td>
-              <td>Luxury</td>
-              <td>SAR 599</td>
-              <td>42</td>
-              <td>120</td>
-              <td>✏️ Edit &nbsp; 🗑️</td>
+              <td colspan="5" class="empty">
+                No products yet
+              </td>
             </tr>
 
-            <tr>
-              <td>Classic Steel Chronograph</td>
-              <td>Men</td>
-              <td>SAR 299</td>
-              <td>64</td>
-              <td>87</td>
-              <td>✏️ Edit &nbsp; 🗑️</td>
-            </tr>
+          </tbody>
 
-          </table>
-
-        </div>
+        </table>
 
       </div>
 
@@ -621,49 +544,18 @@ th{
 
 
     <!-- ORDERS -->
-    <section id="orders" class="section">
+    <section
+      id="orders"
+      class="section"
+    >
 
-      <div class="card">
+      <div class="table-box">
 
-        <div class="title">
-          <h2>Orders</h2>
-          <span>All customer orders</span>
-        </div>
+        <h2>Orders</h2>
 
-        <div class="table-wrap">
-
-          <table>
-
-            <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Product</th>
-              <th>Country</th>
-              <th>Amount</th>
-              <th>Status</th>
-            </tr>
-
-            <tr>
-              <td>#TO-1024</td>
-              <td>Customer 01</td>
-              <td>Luxury Black</td>
-              <td>Saudi Arabia</td>
-              <td>SAR 599</td>
-              <td><span class="status">Delivered</span></td>
-            </tr>
-
-            <tr>
-              <td>#TO-1023</td>
-              <td>Customer 02</td>
-              <td>Steel Chronograph</td>
-              <td>Germany</td>
-              <td>EUR 299</td>
-              <td><span class="status">Processing</span></td>
-            </tr>
-
-          </table>
-
-        </div>
+        <p class="empty">
+          No orders yet.
+        </p>
 
       </div>
 
@@ -671,43 +563,18 @@ th{
 
 
     <!-- CUSTOMERS -->
-    <section id="customers" class="section">
+    <section
+      id="customers"
+      class="section"
+    >
 
-      <div class="card">
+      <div class="table-box">
 
-        <div class="title">
-          <h2>Customers</h2>
-          <span>Customer information</span>
-        </div>
+        <h2>Customers</h2>
 
-        <div class="table-wrap">
-
-          <table>
-
-            <tr>
-              <th>Customer</th>
-              <th>Country</th>
-              <th>Orders</th>
-              <th>Total Spent</th>
-            </tr>
-
-            <tr>
-              <td>Customer 01</td>
-              <td>Saudi Arabia</td>
-              <td>8</td>
-              <td>SAR 3,250</td>
-            </tr>
-
-            <tr>
-              <td>Customer 02</td>
-              <td>France</td>
-              <td>5</td>
-              <td>EUR 1,420</td>
-            </tr>
-
-          </table>
-
-        </div>
+        <p class="empty">
+          No customers yet.
+        </p>
 
       </div>
 
@@ -715,76 +582,18 @@ th{
 
 
     <!-- ANALYTICS -->
-    <section id="analytics" class="section">
+    <section
+      id="analytics"
+      class="section"
+    >
 
-      <div class="stats">
+      <div class="table-box">
 
-        <div class="card">
-          <div class="label">24 Hours</div>
-          <div class="value gold">18 Orders</div>
-        </div>
+        <h2>Analytics</h2>
 
-        <div class="card">
-          <div class="label">72 Hours</div>
-          <div class="value">51 Orders</div>
-        </div>
-
-        <div class="card">
-          <div class="label">1 Week</div>
-          <div class="value">143 Orders</div>
-        </div>
-
-        <div class="card">
-          <div class="label">1 Month</div>
-          <div class="value">582 Orders</div>
-        </div>
-
-      </div>
-
-      <div class="card" style="margin-top:18px">
-
-        <div class="title">
-          <h2>Country Sales</h2>
-          <span>Overview</span>
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <tr>
-              <th>Country</th>
-              <th>Orders</th>
-              <th>Revenue</th>
-            </tr>
-
-            <tr>
-              <td>🇸🇦 Saudi Arabia</td>
-              <td>310</td>
-              <td>SAR 42,500</td>
-            </tr>
-
-            <tr>
-              <td>🇩🇪 Germany</td>
-              <td>94</td>
-              <td>EUR 21,400</td>
-            </tr>
-
-            <tr>
-              <td>🇫🇷 France</td>
-              <td>76</td>
-              <td>EUR 16,800</td>
-            </tr>
-
-            <tr>
-              <td>🇧🇩 Bangladesh</td>
-              <td>52</td>
-              <td>BDT 580,000</td>
-            </tr>
-
-          </table>
-
-        </div>
+        <p class="empty">
+          Analytics will appear here.
+        </p>
 
       </div>
 
@@ -792,49 +601,18 @@ th{
 
 
     <!-- ADMINS -->
-    <section id="admins" class="section">
+    <section
+      id="admins"
+      class="section"
+    >
 
-      <div class="card">
+      <div class="table-box">
 
-        <div class="title">
-          <h2>Admin Management</h2>
-          <span>Private Main Admin area</span>
-        </div>
+        <h2>Admin Management</h2>
 
-        <div class="table-wrap">
-
-          <table>
-
-            <tr>
-              <th>Admin</th>
-              <th>Role</th>
-              <th>Product</th>
-              <th>Orders</th>
-              <th>Dashboard</th>
-              <th>Status</th>
-            </tr>
-
-            <tr>
-              <td>Main Admin</td>
-              <td>👑 MAIN ADMIN</td>
-              <td>Full</td>
-              <td>Full</td>
-              <td>Full</td>
-              <td><span class="status">Active</span></td>
-            </tr>
-
-            <tr>
-              <td>Admin 02</td>
-              <td>Admin</td>
-              <td>Yes</td>
-              <td>Yes</td>
-              <td>No</td>
-              <td><span class="status">Active</span></td>
-            </tr>
-
-          </table>
-
-        </div>
+        <p class="empty">
+          Admin management will be added later.
+        </p>
 
       </div>
 
@@ -842,39 +620,18 @@ th{
 
 
     <!-- SETTINGS -->
-    <section id="settings" class="section">
+    <section
+      id="settings"
+      class="section"
+    >
 
-      <div class="card">
+      <div class="table-box">
 
-        <div class="title">
-          <h2>Settings</h2>
-          <span>TIMEORA configuration</span>
-        </div>
+        <h2>Settings</h2>
 
-        <div class="form-group">
-          <label>Store Name</label>
-          <input value="TIMEORA">
-        </div>
-
-        <div class="form-group">
-          <label>Default Currency</label>
-          <select>
-            <option>SAR - Saudi Riyal</option>
-            <option>USD - US Dollar</option>
-            <option>EUR - Euro</option>
-            <option>BDT - Bangladeshi Taka</option>
-            <option>GBP - British Pound</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Store Description</label>
-          <textarea>Premium watches for customers worldwide.</textarea>
-        </div>
-
-        <button class="add-btn">
-          SAVE SETTINGS
-        </button>
+        <p class="empty">
+          TIMEORA settings.
+        </p>
 
       </div>
 
@@ -887,75 +644,152 @@ th{
 
 <script>
 
+/* LOGIN */
+
 function signIn(){
 
-  const id=document.getElementById("adminId").value;
-  const password=document.getElementById("password").value;
+  const id =
+    document.getElementById("adminId").value;
 
-  /* Temporary testing login */
-  if(id==="mainadmin" && password==="123456"){
+  const password =
+    document.getElementById("password").value;
 
-    document.getElementById("login").style.display="none";
-    document.getElementById("app").style.display="block";
+  if(
+    id === "mainadmin" &&
+    password === "123456"
+  ){
+
+    document.getElementById("login").style.display =
+      "none";
+
+    document.getElementById("app").style.display =
+      "block";
 
   }else{
 
-    document.getElementById("error").style.display="block";
+    document.getElementById("error").style.display =
+      "block";
 
   }
+
 }
 
+
+/* LOGOUT */
 
 function logout(){
 
-  document.getElementById("app").style.display="none";
-  document.getElementById("login").style.display="flex";
+  document.getElementById("app").style.display =
+    "none";
 
-  document.getElementById("password").value="";
+  document.getElementById("login").style.display =
+    "flex";
+
 }
 
 
-function showSection(section,button){
+/* SECTIONS */
 
-  document.querySelectorAll(".section").forEach(function(item){
+function showSection(section){
+
+  const sections =
+    document.querySelectorAll(".section");
+
+  sections.forEach(function(item){
+
     item.classList.remove("active");
+
   });
 
-  document.getElementById(section).classList.add("active");
 
-  document.querySelectorAll(".nav button").forEach(function(item){
-    item.classList.remove("active");
-  });
+  document
+    .getElementById(section)
+    .classList.add("active");
 
-  button.classList.add("active");
-
-  const titles={
-    dashboard:"Dashboard",
-    products:"Products",
-    orders:"Orders",
-    customers:"Customers",
-    analytics:"Analytics",
-    admins:"Admin Management",
-    settings:"Settings"
-  };
-
-  document.getElementById("pageTitle").textContent=titles[section];
-
-  window.scrollTo(0,0);
 }
 
 
-function changeCurrency(currency){
+/* ADD PRODUCT */
 
-  const values={
-    SAR:"SAR 2,450",
-    USD:"USD 653",
-    BDT:"BDT 79,500",
-    EUR:"EUR 554",
-    GBP:"GBP 480"
-  };
+function addProduct(){
 
-  document.getElementById("rev24").textContent=values[currency];
+  const name =
+    document.getElementById("productName").value;
+
+  const brand =
+    document.getElementById("brand").value;
+
+  const price =
+    document.getElementById("price").value;
+
+  const category =
+    document.getElementById("category").value;
+
+  const stock =
+    document.getElementById("stock").value;
+
+
+  if(
+    name === "" ||
+    price === "" ||
+    category === ""
+  ){
+
+    alert("Please fill Product Name, Price and Category.");
+
+    return;
+
+  }
+
+
+  const table =
+    document.getElementById("productTable");
+
+
+  const empty =
+    table.querySelector(".empty");
+
+  if(empty){
+
+    table.innerHTML = "";
+
+  }
+
+
+  const row =
+    document.createElement("tr");
+
+
+  row.innerHTML = `
+    <td>${name}</td>
+    <td>${brand}</td>
+    <td>৳${price}</td>
+    <td>${category}</td>
+    <td>${stock}</td>
+  `;
+
+
+  table.appendChild(row);
+
+
+  const total =
+    table.querySelectorAll("tr").length;
+
+  document.getElementById("totalProducts").textContent =
+    total;
+
+
+  document.getElementById("productName").value = "";
+  document.getElementById("brand").value = "";
+  document.getElementById("price").value = "";
+  document.getElementById("oldPrice").value = "";
+  document.getElementById("category").value = "";
+  document.getElementById("stock").value = "";
+  document.getElementById("productImage").value = "";
+  document.getElementById("description").value = "";
+
+
+  alert("Product added successfully!");
 
 }
 
