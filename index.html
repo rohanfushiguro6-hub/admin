@@ -2,796 +2,655 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>TIMEORA Admin Panel</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
-
-body{
-  background:#0b0b0b;
-  color:#fff;
-}
-
-button{
-  cursor:pointer;
-}
-
-#login{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.login-box{
-  width:350px;
-  padding:35px;
-  background:#151515;
-  border:1px solid #d4af37;
-  border-radius:15px;
-  text-align:center;
-}
-
-.login-box h1{
-  color:#d4af37;
-  margin-bottom:10px;
-}
-
-.login-box p{
-  color:#aaa;
-  margin-bottom:25px;
-}
-
-.login-box input{
-  width:100%;
-  padding:13px;
-  margin:8px 0;
-  background:#222;
-  border:1px solid #444;
-  color:white;
-  border-radius:7px;
-}
-
-.login-box button{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  background:#d4af37;
-  border:0;
-  border-radius:7px;
-  font-weight:bold;
-}
-
-#error{
-  display:none;
-  color:#ff5555;
-  margin-top:12px;
-}
-
-#app{
-  display:none;
-}
-
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  width:230px;
-  height:100vh;
-  background:#111;
-  border-right:1px solid #333;
-  padding:25px 15px;
-}
-
-.logo{
-  text-align:center;
-  color:#d4af37;
-  font-size:25px;
-  font-weight:bold;
-  margin-bottom:30px;
-}
-
-.sidebar button{
-  width:100%;
-  padding:13px;
-  margin:5px 0;
-  background:transparent;
-  color:#ddd;
-  border:0;
-  border-radius:7px;
-  text-align:left;
-}
-
-.sidebar button:hover{
-  background:#222;
-  color:#d4af37;
-}
-
-.main{
-  margin-left:230px;
-  padding:30px;
-}
-
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:25px;
-}
-
-.header h1{
-  color:#d4af37;
-}
-
-.logout{
-  background:#d4af37;
-  border:0;
-  padding:10px 18px;
-  border-radius:7px;
-  font-weight:bold;
-}
-
-.section{
-  display:none;
-}
-
-.section.active{
-  display:block;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.card{
-  background:#151515;
-  border:1px solid #292929;
-  padding:20px;
-  border-radius:12px;
-}
-
-.card h3{
-  color:#aaa;
-  font-size:14px;
-}
-
-.card p{
-  color:#d4af37;
-  font-size:25px;
-  margin-top:10px;
-}
-
-.form-box{
-  background:#151515;
-  padding:25px;
-  border-radius:12px;
-  margin-bottom:25px;
-}
-
-.form-box h2{
-  color:#d4af37;
-  margin-bottom:20px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.form-box input,
-.form-box textarea,
-.form-box select{
-  width:100%;
-  padding:12px;
-  background:#222;
-  color:white;
-  border:1px solid #444;
-  border-radius:7px;
-}
-
-.form-box textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.full{
-  grid-column:1/-1;
-}
-
-.add-btn{
-  background:#d4af37;
-  border:0;
-  padding:13px 25px;
-  border-radius:7px;
-  font-weight:bold;
-}
-
-.table-box{
-  background:#151515;
-  padding:20px;
-  border-radius:12px;
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-th,td{
-  padding:13px;
-  border-bottom:1px solid #333;
-  text-align:left;
-}
-
-th{
-  color:#d4af37;
-}
-
-.empty{
-  text-align:center;
-  color:#888;
-  padding:25px;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#0b0b0b;color:#fff}
+button{cursor:pointer}
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-box{width:350px;background:#151515;padding:35px;border:1px solid #d4af37;border-radius:15px;text-align:center}
+.login-box h1{color:#d4af37;margin-bottom:8px}
+.login-box p{color:#999;margin-bottom:20px}
+.login-box input{width:100%;padding:13px;margin:7px 0;background:#222;border:1px solid #444;border-radius:7px;color:#fff}
+.login-box button{width:100%;padding:13px;margin-top:10px;background:#d4af37;border:0;border-radius:7px;font-weight:bold}
+#error{display:none;color:#ff5555;margin-top:12px}
+#app{display:none}
+.sidebar{position:fixed;left:0;top:0;width:230px;height:100vh;background:#111;border-right:1px solid #333;padding:25px 15px}
+.logo{text-align:center;color:#d4af37;font-size:25px;font-weight:bold;margin-bottom:30px}
+.sidebar button{width:100%;padding:13px;margin:5px 0;background:transparent;color:#ddd;border:0;border-radius:7px;text-align:left}
+.sidebar button:hover{background:#222;color:#d4af37}
+.main{margin-left:230px;padding:30px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.header h1{color:#d4af37}
+.logout{background:#d4af37;border:0;padding:10px 18px;border-radius:7px;font-weight:bold}
+.section{display:none}
+.section.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:#151515;border:1px solid #292929;padding:20px;border-radius:12px}
+.card h3{color:#aaa;font-size:14px}
+.card p{color:#d4af37;font-size:25px;margin-top:10px}
+.form-box,.table-box{background:#151515;padding:25px;border-radius:12px;margin-bottom:25px}
+.form-box h2,.table-box h2{color:#d4af37;margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-box input,.form-box textarea,.form-box select{width:100%;padding:12px;background:#222;color:white;border:1px solid #444;border-radius:7px}
+.form-box textarea{min-height:100px;resize:vertical}
+.full{grid-column:1/-1}
+.add-btn{background:#d4af37;border:0;padding:13px 25px;border-radius:7px;font-weight:bold}
+.table-box{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:13px;border-bottom:1px solid #333;text-align:left}
+th{color:#d4af37}
+.empty{text-align:center;color:#888;padding:25px}
+.product-img{width:55px;height:55px;object-fit:cover;border-radius:7px}
+.delete-btn{background:#b33;color:#fff;border:0;padding:7px 10px;border-radius:5px}
+.status{margin-top:12px;color:#d4af37}
 
 @media(max-width:800px){
-  .sidebar{
-    width:180px;
-  }
-
-  .main{
-    margin-left:180px;
-  }
-
-  .cards{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
+.sidebar{width:180px}
+.main{margin-left:180px}
+.cards{grid-template-columns:1fr 1fr}
+.form-grid{grid-template-columns:1fr}
 }
-
 @media(max-width:550px){
-  .sidebar{
-    position:relative;
-    width:100%;
-    height:auto;
-  }
-
-  .main{
-    margin-left:0;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
+.sidebar{position:relative;width:100%;height:auto}
+.main{margin-left:0}
+.cards{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
+<div class="login-box">
 
-  <div class="login-box">
+<h1>TIMEORA</h1>
+<p>Admin Panel</p>
 
-    <h1>TIMEORA</h1>
-    <p>Admin Panel</p>
+<input type="email" id="adminEmail" placeholder="Admin Email">
 
-    <input
-      type="text"
-      id="adminId"
-      placeholder="Admin ID"
-    >
+<input type="password" id="adminPassword" placeholder="Password">
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
+<button onclick="signIn()">LOGIN</button>
 
-    <button onclick="signIn()">LOGIN</button>
+<div id="error"></div>
 
-    <div id="error">
-      Wrong Admin ID or Password
-    </div>
-
-  </div>
-
+</div>
 </div>
 
 
-<!-- ADMIN APP -->
 <div id="app">
 
-  <aside class="sidebar">
+<aside class="sidebar">
 
-    <div class="logo">TIMEORA</div>
+<div class="logo">TIMEORA</div>
 
-    <button onclick="showSection('dashboard')">
-      Dashboard
-    </button>
+<button onclick="showSection('dashboard')">Dashboard</button>
+<button onclick="showSection('products')">Products</button>
+<button onclick="showSection('orders')">Orders</button>
+<button onclick="showSection('customers')">Customers</button>
+<button onclick="showSection('analytics')">Analytics</button>
+<button onclick="showSection('admins')">Admin Management</button>
+<button onclick="showSection('settings')">Settings</button>
+<button onclick="logout()">Logout</button>
 
-    <button onclick="showSection('products')">
-      Products
-    </button>
+</aside>
 
-    <button onclick="showSection('orders')">
-      Orders
-    </button>
 
-    <button onclick="showSection('customers')">
-      Customers
-    </button>
+<main class="main">
 
-    <button onclick="showSection('analytics')">
-      Analytics
-    </button>
+<div class="header">
+<h1>TIMEORA Admin</h1>
+<button class="logout" onclick="logout()">Logout</button>
+</div>
 
-    <button onclick="showSection('admins')">
-      Admin Management
-    </button>
 
-    <button onclick="showSection('settings')">
-      Settings
-    </button>
+<section id="dashboard" class="section active">
 
-    <button onclick="logout()">
-      Logout
-    </button>
+<div class="cards">
 
-  </aside>
+<div class="card">
+<h3>Total Revenue</h3>
+<p>৳0</p>
+</div>
 
+<div class="card">
+<h3>Total Products</h3>
+<p id="totalProducts">0</p>
+</div>
 
-  <main class="main">
+<div class="card">
+<h3>Total Orders</h3>
+<p>0</p>
+</div>
 
-    <div class="header">
+<div class="card">
+<h3>Total Customers</h3>
+<p>0</p>
+</div>
 
-      <h1>TIMEORA Admin</h1>
+</div>
 
-      <button
-        class="logout"
-        onclick="logout()"
-      >
-        Logout
-      </button>
+</section>
 
-    </div>
 
+<section id="products" class="section">
 
-    <!-- DASHBOARD -->
-    <section
-      id="dashboard"
-      class="section active"
-    >
+<div class="form-box">
 
-      <div class="cards">
+<h2>Add Product</h2>
 
-        <div class="card">
-          <h3>Total Revenue</h3>
-          <p>৳0</p>
-        </div>
+<div class="form-grid">
 
-        <div class="card">
-          <h3>Total Products</h3>
-          <p id="totalProducts">0</p>
-        </div>
+<input type="text" id="productName" placeholder="Product Name">
 
-        <div class="card">
-          <h3>Total Orders</h3>
-          <p>0</p>
-        </div>
+<input type="number" id="price" placeholder="Price">
 
-        <div class="card">
-          <h3>Total Customers</h3>
-          <p>0</p>
-        </div>
+<input type="number" id="oldPrice" placeholder="Old Price">
 
-      </div>
+<select id="category">
 
-    </section>
+<option value="">Select Category</option>
+<option value="Men">Men</option>
+<option value="Women">Women</option>
+<option value="Smart">Smart</option>
+<option value="Luxury">Luxury</option>
+<option value="Sport">Sport</option>
 
+</select>
 
-    <!-- PRODUCTS -->
-    <section
-      id="products"
-      class="section"
-    >
+<input type="number" id="stock" placeholder="Stock">
 
-      <div class="form-box">
+<input type="text" id="currency" value="BDT" placeholder="Currency">
 
-        <h2>Add Product</h2>
+<input type="text" id="color" placeholder="Color">
 
-        <div class="form-grid">
+<input type="file" id="productImage" accept="image/*" class="full">
 
-          <input
-            type="text"
-            id="productName"
-            placeholder="Product Name"
-          >
+<textarea id="description" placeholder="Product Description" class="full"></textarea>
 
-          <input
-            type="text"
-            id="brand"
-            placeholder="Brand"
-          >
+<div class="full">
 
-          <input
-            type="number"
-            id="price"
-            placeholder="Price"
-          >
+<button class="add-btn" onclick="addProduct()">
++ ADD PRODUCT
+</button>
 
-          <input
-            type="number"
-            id="oldPrice"
-            placeholder="Old Price"
-          >
+<div id="productStatus" class="status"></div>
 
-          <select id="category">
+</div>
 
-            <option value="">
-              Select Category
-            </option>
+</div>
+</div>
 
-            <option value="Men">
-              Men
-            </option>
 
-            <option value="Women">
-              Women
-            </option>
+<div class="table-box">
 
-            <option value="Smart">
-              Smart
-            </option>
+<h2>Products</h2>
 
-            <option value="Luxury">
-              Luxury
-            </option>
+<table>
 
-            <option value="Sport">
-              Sport
-            </option>
+<thead>
 
-          </select>
+<tr>
+<th>Image</th>
+<th>Name</th>
+<th>Price</th>
+<th>Category</th>
+<th>Stock</th>
+<th>Action</th>
+</tr>
 
+</thead>
 
-          <input
-            type="number"
-            id="stock"
-            placeholder="Stock"
-          >
+<tbody id="productTable">
 
+<tr>
+<td colspan="6" class="empty">Loading...</td>
+</tr>
 
-          <input
-            type="file"
-            id="productImage"
-            accept="image/*"
-            class="full"
-          >
+</tbody>
 
+</table>
 
-          <textarea
-            id="description"
-            placeholder="Product Description"
-            class="full"
-          ></textarea>
+</div>
 
+</section>
 
-          <div class="full">
 
-            <button
-              class="add-btn"
-              onclick="addProduct()"
-            >
-              + ADD PRODUCT
-            </button>
+<section id="orders" class="section">
+<div class="table-box">
+<h2>Orders</h2>
+<p class="empty">Orders will appear here.</p>
+</div>
+</section>
 
-          </div>
 
-        </div>
+<section id="customers" class="section">
+<div class="table-box">
+<h2>Customers</h2>
+<p class="empty">Customers will appear here.</p>
+</div>
+</section>
 
-      </div>
 
+<section id="analytics" class="section">
+<div class="table-box">
+<h2>Analytics</h2>
+<p class="empty">Analytics will appear here.</p>
+</div>
+</section>
 
-      <div class="table-box">
 
-        <h2>Products</h2>
+<section id="admins" class="section">
+<div class="table-box">
+<h2>Admin Management</h2>
+<p class="empty">Admin management will be added later.</p>
+</div>
+</section>
 
-        <br>
 
-        <table>
+<section id="settings" class="section">
+<div class="table-box">
+<h2>Settings</h2>
+<p class="empty">TIMEORA settings.</p>
+</div>
+</section>
 
-          <thead>
-
-            <tr>
-              <th>Name</th>
-              <th>Brand</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Stock</th>
-            </tr>
-
-          </thead>
-
-          <tbody id="productTable">
-
-            <tr>
-              <td colspan="5" class="empty">
-                No products yet
-              </td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </section>
-
-
-    <!-- ORDERS -->
-    <section
-      id="orders"
-      class="section"
-    >
-
-      <div class="table-box">
-
-        <h2>Orders</h2>
-
-        <p class="empty">
-          No orders yet.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- CUSTOMERS -->
-    <section
-      id="customers"
-      class="section"
-    >
-
-      <div class="table-box">
-
-        <h2>Customers</h2>
-
-        <p class="empty">
-          No customers yet.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- ANALYTICS -->
-    <section
-      id="analytics"
-      class="section"
-    >
-
-      <div class="table-box">
-
-        <h2>Analytics</h2>
-
-        <p class="empty">
-          Analytics will appear here.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- ADMINS -->
-    <section
-      id="admins"
-      class="section"
-    >
-
-      <div class="table-box">
-
-        <h2>Admin Management</h2>
-
-        <p class="empty">
-          Admin management will be added later.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- SETTINGS -->
-    <section
-      id="settings"
-      class="section"
-    >
-
-      <div class="table-box">
-
-        <h2>Settings</h2>
-
-        <p class="empty">
-          TIMEORA settings.
-        </p>
-
-      </div>
-
-    </section>
-
-  </main>
-
+</main>
 </div>
 
 
 <script>
 
-/* LOGIN */
+/* =========================
+   SUPABASE CONNECTION
+========================= */
 
-function signIn(){
+const SUPABASE_URL =
+"https://ylfbhpmgmxbdeakoyutz.supabase.co";
 
-  const id =
-    document.getElementById("adminId").value;
+const SUPABASE_PUBLISHABLE_KEY =
+"PASTE_YOUR_PUBLISHABLE_KEY_HERE";
 
-  const password =
-    document.getElementById("password").value;
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
 
-  if(
-    id === "mainadmin" &&
-    password === "123456"
-  ){
 
-    document.getElementById("login").style.display =
-      "none";
+/* =========================
+   LOGIN
+========================= */
 
-    document.getElementById("app").style.display =
-      "block";
+async function signIn(){
 
-  }else{
+const email =
+document.getElementById("adminEmail").value.trim();
 
-    document.getElementById("error").style.display =
-      "block";
+const password =
+document.getElementById("adminPassword").value;
 
-  }
+const error =
+document.getElementById("error");
+
+error.style.display="none";
+
+const {data,error:loginError} =
+await supabaseClient.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(loginError){
+
+error.textContent=loginError.message;
+error.style.display="block";
+return;
+
+}
+
+document.getElementById("login").style.display="none";
+document.getElementById("app").style.display="block";
+
+loadProducts();
 
 }
 
 
-/* LOGOUT */
+/* =========================
+   LOGOUT
+========================= */
 
-function logout(){
+async function logout(){
 
-  document.getElementById("app").style.display =
-    "none";
+await supabaseClient.auth.signOut();
 
-  document.getElementById("login").style.display =
-    "flex";
+document.getElementById("app").style.display="none";
+document.getElementById("login").style.display="flex";
 
 }
 
 
-/* SECTIONS */
+/* =========================
+   SECTION
+========================= */
 
 function showSection(section){
 
-  const sections =
-    document.querySelectorAll(".section");
+document.querySelectorAll(".section").forEach(
+item=>item.classList.remove("active")
+);
 
-  sections.forEach(function(item){
+document.getElementById(section).classList.add("active");
 
-    item.classList.remove("active");
-
-  });
-
-
-  document
-    .getElementById(section)
-    .classList.add("active");
+if(section==="products"){
+loadProducts();
+}
 
 }
 
 
-/* ADD PRODUCT */
+/* =========================
+   ADD PRODUCT
+========================= */
 
-function addProduct(){
+async function addProduct(){
 
-  const name =
-    document.getElementById("productName").value;
+const status =
+document.getElementById("productStatus");
 
-  const brand =
-    document.getElementById("brand").value;
+const name =
+document.getElementById("productName").value.trim();
 
-  const price =
-    document.getElementById("price").value;
+const price =
+document.getElementById("price").value;
 
-  const category =
-    document.getElementById("category").value;
+const oldPrice =
+document.getElementById("oldPrice").value;
 
-  const stock =
-    document.getElementById("stock").value;
+const category =
+document.getElementById("category").value;
 
+const stock =
+document.getElementById("stock").value;
 
-  if(
-    name === "" ||
-    price === "" ||
-    category === ""
-  ){
+const currency =
+document.getElementById("currency").value || "BDT";
 
-    alert("Please fill Product Name, Price and Category.");
+const color =
+document.getElementById("color").value;
 
-    return;
+const description =
+document.getElementById("description").value;
 
-  }
-
-
-  const table =
-    document.getElementById("productTable");
-
-
-  const empty =
-    table.querySelector(".empty");
-
-  if(empty){
-
-    table.innerHTML = "";
-
-  }
+const imageFile =
+document.getElementById("productImage").files[0];
 
 
-  const row =
-    document.createElement("tr");
+if(!name || !price || !category){
 
+status.textContent =
+"Product Name, Price and Category required.";
 
-  row.innerHTML = `
-    <td>${name}</td>
-    <td>${brand}</td>
-    <td>৳${price}</td>
-    <td>${category}</td>
-    <td>${stock}</td>
-  `;
-
-
-  table.appendChild(row);
-
-
-  const total =
-    table.querySelectorAll("tr").length;
-
-  document.getElementById("totalProducts").textContent =
-    total;
-
-
-  document.getElementById("productName").value = "";
-  document.getElementById("brand").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("oldPrice").value = "";
-  document.getElementById("category").value = "";
-  document.getElementById("stock").value = "";
-  document.getElementById("productImage").value = "";
-  document.getElementById("description").value = "";
-
-
-  alert("Product added successfully!");
+return;
 
 }
+
+
+status.textContent="Saving product...";
+
+
+let imageUrl=null;
+
+
+/* IMAGE UPLOAD */
+
+if(imageFile){
+
+const fileName =
+Date.now()+"-"+imageFile.name.replace(/\s+/g,"-");
+
+const {error:uploadError} =
+await supabaseClient.storage
+.from("timeora")
+.upload(fileName,imageFile);
+
+if(uploadError){
+
+status.textContent =
+"Image upload error: "+uploadError.message;
+
+return;
+
+}
+
+
+const {data:urlData} =
+supabaseClient.storage
+.from("timeora")
+.getPublicUrl(fileName);
+
+imageUrl=urlData.publicUrl;
+
+}
+
+
+/* DATABASE INSERT */
+
+const {error:insertError} =
+await supabaseClient
+.from("products")
+.insert({
+
+name:name,
+description:description || null,
+price:Number(price),
+old_price:oldPrice ? Number(oldPrice) : null,
+category:category,
+currency:currency,
+stock:stock ? Number(stock) : 0,
+image_url:imageUrl,
+color:color || null
+
+});
+
+
+if(insertError){
+
+status.textContent =
+"Database error: "+insertError.message;
+
+return;
+
+}
+
+
+status.textContent =
+"Product added successfully!";
+
+
+document.getElementById("productName").value="";
+document.getElementById("price").value="";
+document.getElementById("oldPrice").value="";
+document.getElementById("category").value="";
+document.getElementById("stock").value="";
+document.getElementById("color").value="";
+document.getElementById("description").value="";
+document.getElementById("productImage").value="";
+
+
+loadProducts();
+
+}
+
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+async function loadProducts(){
+
+const table =
+document.getElementById("productTable");
+
+table.innerHTML=
+'<tr><td colspan="6" class="empty">Loading...</td></tr>';
+
+
+const {data,error} =
+await supabaseClient
+.from("products")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(error){
+
+table.innerHTML=
+`<tr>
+<td colspan="6" class="empty">
+${error.message}
+</td>
+</tr>`;
+
+return;
+
+}
+
+
+if(!data || data.length===0){
+
+table.innerHTML=
+'<tr><td colspan="6" class="empty">No products yet.</td></tr>';
+
+document.getElementById("totalProducts").textContent="0";
+
+return;
+
+}
+
+
+table.innerHTML="";
+
+
+data.forEach(product=>{
+
+const row=document.createElement("tr");
+
+row.innerHTML=`
+
+<td>
+${
+product.image_url
+?
+`<img src="${product.image_url}" class="product-img">`
+:
+"No Image"
+}
+</td>
+
+<td>${escapeHtml(product.name || "")}</td>
+
+<td>${product.currency || "BDT"} ${product.price || 0}</td>
+
+<td>${escapeHtml(product.category || "")}</td>
+
+<td>${product.stock || 0}</td>
+
+<td>
+<button
+class="delete-btn"
+onclick="deleteProduct('${product.id}')">
+Delete
+</button>
+</td>
+
+`;
+
+table.appendChild(row);
+
+});
+
+
+document.getElementById("totalProducts").textContent=
+data.length;
+
+}
+
+
+/* =========================
+   DELETE PRODUCT
+========================= */
+
+async function deleteProduct(id){
+
+const ok =
+confirm("Delete this product?");
+
+if(!ok)return;
+
+
+const {error} =
+await supabaseClient
+.from("products")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+alert(error.message);
+return;
+
+}
+
+
+loadProducts();
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHtml(text){
+
+const div=document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
+
+}
+
+
+/* =========================
+   CHECK EXISTING LOGIN
+========================= */
+
+async function checkSession(){
+
+const {data} =
+await supabaseClient.auth.getSession();
+
+if(data.session){
+
+document.getElementById("login").style.display="none";
+document.getElementById("app").style.display="block";
+
+loadProducts();
+
+}
+
+}
+
+checkSession();
 
 </script>
 
